@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Zombie</title>
+    <script src="https://spelprogrammering.nu/simple.js">
+        // Variabel som jag använder som boolean och sätter till true sedan när zombiesen startas.
+        var startedZombies = false;
+        // En variabel för antal zombies
+        var amountOfZombies = 0;
+        // En variabel för en tom lista som jag sedan pushar zombies i.
+        var zombies = [];
+
+        // En funktion som jag använder för olika events i spelet och har inparametern which som är vad det är för typ av event.
+        StartEvent = function(which) {
+            // En switch där jag kan byta mellan olika event. 
+            switch(which) {
+                // Ett nytt case 
+                case "start":
+                    // Variabel för ett html element genom att ta id på elementet
+                    var zombieEl = document.getElementById("zombies");
+                    // Variabel för ett html element genom att ta id på elementet
+                    var zombieEnter = document.getElementById("zombies-enter");
+                    // Variabel för ett html element genom att ta id på elementet
+                    var pointEl = document.getElementById("wrapper-points");
+                    // Variabel för ett html element genom att ta id på elementet
+                    var infoEl = document.getElementById("wrapper-info");
+
+                    // Här sätter jag styles på olika element som jag har definat ovanför.
+                    zombieEl.style.display = 'none';
+                    zombieEnter.style.display = 'none';
+                    pointEl.style.display = "block";
+                    infoEl.style.display = "block";
+
+                    // Här ändrar jag värdet på variabeln beroende på vad man skriver in i inputen.
+                    amountOfZombies = zombieEl.value
+
+                    // En for loop där jag pushar in zombies i den tomma listan som jag har skapat innan och jag pushar med olika attributes som exempelvis, x, y och speed.
+                    for (var i= 1; i <= amountOfZombies; i++) {
+                        zombies.push({
+                            x: random(totalWidth),
+                            y: random(totalHeight),
+                            speed: random(1,10)
+                        });
+                    }
+                    // Här ändrar jag värdet på en boolean till true för att indikera att zombiesen har startat.
+                    startedZombies = true 
+                    // Här breakar caset
+                    break;
+                // Ett nytt case 
+                case "restart":
+                    // Restarta hemsidan för att starta om spelet.
+                    location.reload();
+                    // Här breakar caset
+                    break;
+                // Ett nytt case 
+                case "gameover": 
+                    // Skapar en notifikation med hjälp av en funktion som skapas.
+                    CreateNotify("Game over!")
+                    // Variabel för ett html element genom att ta id på elementet
+                    var restartEl = document.getElementById("zombies-restart");
+                    // Style för elementet restartEl
+                    restartEl.style.display = "block";
+                    // Här breakar caset
+                    break;
+            }
+        }
+
+        // En funktion som används för att skapa egna notifikationer och har inparametern text där man skriver texten på notifikationen.
+        CreateNotify = function(text)  {
+            // Variabel för ett html element genom att ta id på elementet
+            notifyEl = document.getElementById("wrapper-notifications");
+            // Style för elementet notifyEl
+            notifyEl.style.display = "block";
+            // Här ändrar jag innehållet på elementet
+            notifyEl.innerHTML = text;
+        }
+
+        // En variabel som används för att räkna poäng
+        var count = 0
+
+        // En funktion som används för att uppdatera allt
+        update = function() {
+            
+            // En funktion som finns i biblioteket och används för att rensa skärmen
+            clearScreen();
+
+            var i = 0
+
+            // En for loop 
+            for (var i = 0; i < zombies.length; i++) {
+                // Här ändrar jag vad variabeln zombie är 
+                var zombie = zombies[i];
+                // Här lägger jag till en bild för musen
+                picture(mouse.x, mouse.y,"https://cdn.discordapp.com/attachments/634097453888700421/831832633070846023/New_Project_19.png")
+                // Här lägger jag till en bild för zombies
+                picture(zombie.x, zombie.y,"https://cdn.discordapp.com/attachments/690567379947880489/831081713525981184/New_Project_6.png")
+
+                // If sats som kollar om x kordinatern på zombie är mindre än x kordinaten för musen och lägger då till speed eller tar bort
+                if (zombie.x < mouse.x) {
+                    zombie.x = zombie.x + zombie.speed;
+                } else {
+                    zombie.x = zombie.x - zombie.speed;
+                }
+                // If sats som kollar om y kordinatern på zombie är mindre än y kordinaten för musen och lägger då till speed eller tar bort
+                if (zombie.y < mouse.y) {
+                    zombie.y = zombie.y + zombie.speed;
+                } else {
+                    zombie.y = zombie.y - zombie.speed;
+                }
+
+                // Lägger till 1 på variabeln count
+                count += 1
+                // Variabel för ett html element genom att ta id på elementet
+                pointEl = document.getElementById("wrapper-points");
+                // Här ändrar jag innehållet på elementet
+                pointEl.innerHTML = count;
+
+                // En if sats som kollar om space knappen trycks ner
+                if (keyboard.space) {
+                    // Lägger till 50 på poäng under tiden man håller inne space då zombie speeden ökas också
+                    count += 50
+                    // Variabel för ett html element genom att ta id på elementet
+                    pointEl = document.getElementById("wrapper-points");
+                    // Ändrar innehållet innuti elem,ent
+                    pointEl.innerHTML = count;
+                    // Lägger till +1 på speed varje gång man håller inne space
+                    zombie.speed = zombie.speed + 0.5
+                }
+
+                // En if sats som kollar distance mellan musen och zombies 
+                if (distance(zombie,mouse) < 5 ) {
+                    // Stoppar uppdate
+                    stopUpdate();
+                    // Kör eventet ifall man förlorar
+                    StartEvent('gameover');
+                }
+
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <!-- Div för olika html element -->
+    <div id="wrapper-notifications"></div>
+    <div class="wrapper-homescreen"></div>
+    <!-- // Input för hur många zombies man vill ha -->
+    <input type="number" id="zombies" placeholder="Ange hur många zombies du vill möta">
+    <!-- // Knappar för att köra olika funktioner i javascriptet -->
+    <button id="zombies-enter" onclick="StartEvent('start')">Starta spelet!</button>
+    <button id="zombies-restart" onclick="StartEvent('restart')">Spela igen!</button>
+    <!-- // En paragraph tagg för titel och poäng -->
+    <p id="wrapper-info">Håll in space för att få poäng (OBS, ju mer du håller in ju snabbare blir zombies!)</p>
+    <p id="wrapper-points">0</p>
+</body>
+</html>
