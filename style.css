@@ -1,12 +1,14 @@
 * {
-    margin: 0;
+    /*sätter margin till 0 i hela dokumentet      */
+    margin: 0; 
+    /*sätter padding till 0 i hela dokumentet      */
     padding: 0;
+    /*  Ändrar font i hela dokumentet    */
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-/* Bakgryund bild för spelet */
-
 body {
+    /* Bakgryund bild för spelet */
     background-image: url(https://cdna.artstation.com/p/assets/images/images/014/556/020/large/gary-patterson-20181210195206-1.jpg?1544473715);
 }
 
@@ -19,98 +21,140 @@ body {
 
 /* Notifikationer */
 #wrapper-notifications {
+    /*  Sätter display none och hidear elementet    */
     display: none;
+    /*  Gör elementet till absolute    */
     position: absolute;
+    /*  Positionerar elementet i mitten   */
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    /*  Width för elementet    */
     width: 200px;
+    /*  Height för elementet    */
     height: 40px;
+    /*  Line-height för elementet    */
     line-height: 40px;
+    /*  Ändrar bakgrundsfärg på elementet    */
     background-color: rgb(141, 27, 27);
+    /*  Gör kanterna rundare    */
     border-radius: 8px;
+    /*  Sätter texten i mitten   */
     text-align: center;
+    /*  Ändrar färg på texten till vit    */
     color: white;
+    /*  Sätter elementet överst upp med z-index    */
     z-index: 99999 !important;
 }
 
 /* Zombies */
 #zombies {
+    /* Sätter display på block för att den ska visas i början   */
     display: block;
-
+    /*  Gör elementet till absolute    */
     position: absolute;
+    /*  Positionerar elementet i mitten   */
     transform: translate(-50%, -50%);
     left: 50%;
     top: 49%;
-    
+    /*  Sätter elementet överst upp med z-index    */
     z-index: 99999 !important;
 }
 
 /* Starta spel */
 
 #zombies-enter {
+    /* Sätter display på block för att den ska visas i början   */
     display: block;
-    
+    /*  Gör elementet till absolute    */
     position: absolute;
+    /*  Positionerar elementet i mitten   */
     transform: translate(-50%, -50%);
     left: 50%;
     top: 55%;
-
+    /*  Sätter elementet överst upp med z-index    */
     z-index: 99999 !important;
+    /*  Padding på elementet som gör det större inifrån.   */
     padding: 10px;
+    /*  Ändrar bakgrundsfärg på elementet    */
     background-color: rgb(0, 132, 255);
+    /*  Ändrar textens färg till vit    */
     color: white;
+    /*  Sätter border till none för att inte ha några kanter    */
     border: none;
+    /*  Gör kanterna rundare    */
     border-radius: 5px;
+    /*  Tar bort outline    */
     outline: none;
 }
 
 /* Pröva igen */
 
 #zombies-restart {
+    /*  Sätter display none och hidear elementet    */
     display: none;
-    
+    /*  Gör elementet till absolute    */
     position: absolute;
+    /*  Positionerar elementet i mitten   */
     transform: translate(-50%, -50%);
     left: 50%;
     top: 55%;
+    /*  Padding på elementet som gör det större inifrån.   */
     padding: 5px;
-
+    /*  Sätter elementet överst upp med z-index    */
     z-index: 99999 !important;
+    /*  Tar bort outline    */
     outline: none;
 }
 
 /* antal zombies */
 #zombies {
+     /*  Padding på elementet som gör det större inifrån.   */
     padding: 10px;
+    /*  Width för elementet    */
     width: 240px;
+    /*  Tar bort outline    */
     outline: none;
+    /*  Sätter border till none för att inte ha några kanter    */
     border: none;
+    /*  Gör kanterna rundare    */
     border-radius: 5px;
 }
 
 
 /* Poäng */
 #wrapper-points {
+    /*  Sätter display none och hidear elementet    */
     display: none;
+     /*  Gör elementet till absolute    */
     position: absolute;
+    /*  Positionerar elementet i mitten   */
     transform: translate(-50%, -50%);
     left: 50%;
     top: 20%;
+    /*  Sätter elementet överst upp med z-index    */
     z-index: 99999 !important;
+    /*  Ändrar storleken på fonten    */
     font-size: 1.8em;
+    /*  Ändrar färgen på texten till vit    */
     color: white;
 }
 
 
 /* Info text */
 #wrapper-info {
+    /*  Sätter display none och hidear elementet    */
     display: none;
+    /*  Gör elementet till absolute    */
     position: absolute;
+    /*  Positionerar elementet i mitten   */
     transform: translate(-50%, -50%);
     left: 50%;
     top: 10%;
+    /*  Sätter elementet överst upp med z-index    */
     z-index: 99999 !important;
+    /*  Ändrar storleken på fonten    */
     font-size: 1.2em;
+    /*  Ändrar färgen på texten till vit    */
     color: white;
 }
